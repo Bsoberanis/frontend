@@ -1,21 +1,19 @@
-import { useRouter } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import router from "./routes";
+import routes from "./routes.jsx";
 
 
-export const App = () =>{
-    
-    let element = useRouter(router);
-    return ( 
-        <>
-        {element}
-        <Toaster
-        position="botton-ringht"
+export const App = () => {
+
+  let element = useRoutes(routes);
+
+  return (
+    <>
+      {element}
+      <Toaster
+        position="bottom-right"
         reverseOrder={false}
-        
-        />
-        </>
-        
-        
-    )
+      />
+    </>
+  )
 }

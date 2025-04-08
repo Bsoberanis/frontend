@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Logo } from './logo';
+import { Logo } from './Logo';
 import { Input } from './Input';
 import {
     emailValidationMessage,
@@ -92,9 +92,9 @@ export const Login = ({ switchAuthHandler }) => {
                     Log in
                 </button>
             </form>
-            <button onClick={switchAuthHandler} className="auth-form-switch-label" type="button">
+            <span onClick={switchAuthHandler} className="auth-form-switch-label">
                 Don't have an account? Sign up
-            </button>
+            </span>
         </div>
     )
 }
