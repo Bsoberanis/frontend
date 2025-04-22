@@ -1,16 +1,18 @@
 import { useState } from "react";
-import toast  from "react-hot-toast";
-import { getChannels as getChannels, getFollowedChannels } from "../../services/api";
+import toast from "react-hot-toast";
+import { getChannels as getChannelsRequest, getFollowedChannels } from "../../services/api";
 
 export const useChannels = () => {
+
     const [ channels, setChannels ] = useState(null)
 
-    const getVhannels = async (isLogged =false) => {
+    const getChannels = async (isLogged = false) => {
+
         const channelsData = await getChannelsRequest()
 
         if(channelsData.error){
             return toast.error(
-                cahannelsData
+                channelsData.e?.response?.data || 'Ocurrio un error al leer los canales'
             )
         }
 
@@ -20,20 +22,26 @@ export const useChannels = () => {
             });
         }
 
-        const getFollowedChannelsData = await getFollowedChannels();
+        const followedChannelsData = await getFollowedChannels();
 
         if(followedChannelsData.error){
             return toast.error(
-                
-                    channelsData.e?.response?.data || 'Ocurre un  error al leer los canales que sigues'
+                channelsData.e?.response?.data || 'Ocurrio un error al leer los canales que sigues'
             )
-
-            setChannels({
-                channels: channelsData.data.channels,
-                followedChannels: channelsData.data.channels.filter(cahannels =>
-                    followedChannelsData.data.follewed
-                )
-            })
         }
+
+        setChannels({
+            channels: channelsData.data.channels,
+            followedChannels: channelsData.data.channels.filter( channel =>
+                followedChannelsData.data.followedChannels.includes(channel.id)
+            )
+        });
+    }
+
+    return {
+        getChannels,
+        isFetching: !Boolean(channels),
+        allChannels: channels?.channels,
+        followedChannels: channels?.followedChannels
     }
 }

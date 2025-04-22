@@ -18,9 +18,9 @@ const NavLogo = () => {
 
 const NavButton = ({text, onClickHandler}) => {
     return(
-        <button className="nav-button" onClick={onClickHandler}>
+        <span className="nav-button" onClick={onClickHandler}>
             {text}
-        </button>
+        </span>
     )
 }
 
