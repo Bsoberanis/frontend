@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Channels } from '../channel/Channels'
 import { Settings } from '../settings/Settings';
 import { ChannelView } from '../channel/ChannelView';
-import { getChannels } from '../../services';
 
 export const Content = ({ channels, getChannels }) => {
     return (

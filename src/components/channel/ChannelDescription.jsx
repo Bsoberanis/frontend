@@ -1,41 +1,44 @@
-import { useFollowChannel, useUserDatails } from "../../shared/useFollowChannel";
+import { useFollowChannel, useUserDetails } from "../../shared/hooks";
 
-export const followButton = ({channelID, getChannels}) =>{
-    const  { useFollowChannel} = useFollowChannel();
+const FollowButton = ({ channelId, getChannels }) => {
+
+    const { followChannel } = useFollowChannel();
 
     const handleFollowChannel = () => {
-        useFollowChannel(channelId, getChannnels)
+        followChannel(channelId, getChannels)
     }
-    return <button onClick={handleFollowChannel} className="channel-follow-button">follow hannel</button>
+
+    return <button onClick={handleFollowChannel} className="channel-follow-button">Follow Channel</button>
 }
+
 export const ChannelDescription = ({
     username,
     title,
     description,
-    channelId
+    channelId,
+    getChannels
 }) => {
-    const { isLogged } = useUserDatails();
 
-    return(
-        <div className="channel.description-container">
-            <span className="channels-description.title">
+    const { isLogged } = useUserDetails();
+
+    return (
+        <div className="channel-description-container">
+            <span className="channel-description-title">
                 {username}
                 <span>
                     {isLogged && (
                         <FollowButton
-                        className="channel-follow-button"
-                        channelId={chanelId}
-                        getChannels={getChannels}
+                            className='channel-follow-button'
+                            channelId={channelId}
+                            getChannels={getChannels}
                         />
                     )}
                 </span>
             </span>
-            <span>
-                <span className="channel-description-title">{title}</span>
-            </span>
-                    <div className="channels-description-box">
-                        <span className="channel-description">{desciption}</span>
-                    </div>
+            <span className="channel-description-title">{title}</span>
+            <div className="channel-description-box">
+                <span className="channel-description">{description}</span>
+            </div>
         </div>
     )
 }
